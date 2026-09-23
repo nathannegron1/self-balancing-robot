@@ -61,9 +61,9 @@ The gyroscope responds quickly to changes in orientation, making it useful for s
 
 The accelerometer provides a second estimate of the robot's orientation. In the coordinate system used by the robot, the pitch angle is calculated as
 
-$$
-\theta_a = \operatorname{atan2}(a_y,-a_z)
-$$
+```math
+\theta_a = \mathrm{atan2}(a_y,-a_z)
+```
 
 When the robot is stationary, the accelerometer primarily measures the direction of gravity. This provides an absolute reference for the robot's tilt and does not suffer from the long-term drift associated with gyroscope integration.
 
@@ -71,17 +71,17 @@ The disadvantage is that the accelerometer cannot distinguish gravity from accel
 
 A complementary filter combines the advantages of both sensors:
 
-$$
+```math
 \theta[k] =
 \alpha\left(\theta[k-1] + \omega_g\Delta t\right)
 + (1-\alpha)\theta_a
-$$
+```
 
 where
 
-$$
+```math
 \alpha = \frac{\tau}{\tau+\Delta t}
-$$
+```
 
 The gyroscope therefore dominates short-term changes in the angle estimate, while the accelerometer gradually corrects long-term gyroscope drift.
 
@@ -101,15 +101,12 @@ $$
 
 The motor command is then calculated using proportional, integral, and derivative feedback:
 
-$$
-u(t)
-=
-K_Pe(t)
-+
-K_I\int e(t)\,dt
-+
-K_D\omega(t)
-$$
+```math
+u(t) =
+K_P e(t)
++ K_I \int e(t)\,dt
++ K_D \omega(t)
+```
 
 where $u(t)$ determines the magnitude and direction of the motor PWM command.
 
@@ -157,8 +154,16 @@ The complete Arduino firmware is available in [`Firmware/self_balancing_robot.in
 
 ### Balance and Disturbance Recovery
 
-[![Balance and disturbance recovery](Media/balance-demo-thumbnail.jpg)](https://youtu.be/lFiMf_9Ouro)
+<a href="https://youtu.be/lFiMf_9Ouro">
+  <img src="Media/balance-demo-thumbnail.jpg" alt="Balance and disturbance recovery demo" width="500">
+</a>
+
+**[▶ Watch balance and disturbance recovery demo](https://youtu.be/lFiMf_9Ouro)**
 
 ### Forward and Reverse Control
 
-[![Forward and reverse control](Media/drive-demo-thumbnail.jpg)](https://youtu.be/GUXs6BVlu4w)
+<a href="https://youtu.be/GUXs6BVlu4w">
+  <img src="Media/drive-demo-thumbnail.jpg" alt="Forward and reverse control demo" width="500">
+</a>
+
+**[▶ Watch forward and reverse control demo](https://youtu.be/GUXs6BVlu4w)**
